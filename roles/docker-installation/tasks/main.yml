@@ -27,4 +27,4 @@
   tags: docker
 
 - name: Install docker-compose python3 library
-  pip: name="docker-compose" state=latest update_cache=yes
+  command: "pip3 install docker-compose"
