@@ -64,9 +64,9 @@
       image: milvusdb/milvus:v2.0.1
       command: "milvus run querynode"
       env:
-        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
-        MINIO_ADDRESS: {{MINIO_ADDRESS}}
-        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
+        MINIO_ADDRESS: "{{MINIO_ADDRESS}}"
+        PULSAR_ADDRESS: "{{PULSAR_ADDRESS}}"
       network_mode: "{{nodes_network}}"
       published_ports:
         - 21123:21123
@@ -78,9 +78,9 @@
       image: milvusdb/milvus:v2.0.1
       command: "milvus run datanode"
       env:
-        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
-        MINIO_ADDRESS: {{MINIO_ADDRESS}}
-        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
+        MINIO_ADDRESS: "{{MINIO_ADDRESS}}"
+        PULSAR_ADDRESS: "{{PULSAR_ADDRESS}}"
       network_mode: "{{nodes_network}}"
       published_ports:
         - 21124:21124
@@ -92,9 +92,9 @@
       image: milvusdb/milvus:v2.0.1
       command: "milvus run indexnode"
       env:
-        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
-        MINIO_ADDRESS: {{MINIO_ADDRESS}}
-        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
+        MINIO_ADDRESS: "{{MINIO_ADDRESS}}"
+        PULSAR_ADDRESS: "{{PULSAR_ADDRESS}}"
         # INDEX_COORD_ADDRESS: "indexcoord:31000"
       network_mode: "{{nodes_network}}"
       published_ports:
@@ -113,10 +113,10 @@
       image: milvusdb/milvus:v2.0.1
       command: ["milvus", "run", "rootcoord"]
       env:
-        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
-        MINIO_ADDRESS: {{MINIO_ADDRESS}}
-        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
-        QUERY_COORD_ADDRESS: {{QUERY_COORD_ADDRESS}}
+        ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
+        MINIO_ADDRESS: "{{MINIO_ADDRESS}}"
+        PULSAR_ADDRESS: "{{PULSAR_ADDRESS}}"
+        QUERY_COORD_ADDRESS: "{{QUERY_COORD_ADDRESS}}"
       network_mode: "{{nodes_network}}"
       published_ports:
         - 53100:53100
@@ -128,10 +128,10 @@
       image: milvusdb/milvus:v2.0.1
       command: ["milvus", "run", "datacoord"]
       env:
-        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
-        MINIO_ADDRESS: {{MINIO_ADDRESS}}
-        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
-        DATA_COORD_ADDRESS: {{DATA_COORD_ADDRESS}}
+        ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
+        MINIO_ADDRESS: "{{MINIO_ADDRESS}}"
+        PULSAR_ADDRESS: "{{PULSAR_ADDRESS}}"
+        DATA_COORD_ADDRESS: "{{DATA_COORD_ADDRESS}}"
       network_mode: "{{nodes_network}}"
       published_ports:
         - 13333:13333
@@ -143,10 +143,10 @@
       image: milvusdb/milvus:v2.0.1
       command: "milvus run querycoord"
       env:
-        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
-        MINIO_ADDRESS: {{MINIO_ADDRESS}}
-        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
-        QUERY_COORD_ADDRESS: {{QUERY_COORD_ADDRESS}}
+        ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
+        MINIO_ADDRESS: "{{MINIO_ADDRESS}}"
+        PULSAR_ADDRESS: "{{PULSAR_ADDRESS}}"
+        QUERY_COORD_ADDRESS: "{{QUERY_COORD_ADDRESS}}"
       network_mode: "{{nodes_network}}"
       published_ports:
         - 19531:19531
@@ -158,10 +158,10 @@
       image: milvusdb/milvus:v2.0.1
       command: ["milvus", "run", "indexcoord"]
       env:
-        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
-        MINIO_ADDRESS: {{MINIO_ADDRESS}}
-        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
-        INDEX_COORD_ADDRESS: {{INDEX_COORD_ADDRESS}}
+        ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
+        MINIO_ADDRESS: "{{MINIO_ADDRESS}}"
+        PULSAR_ADDRESS: "{{PULSAR_ADDRESS}}"
+        INDEX_COORD_ADDRESS: "{{INDEX_COORD_ADDRESS}}"
       network_mode: "{{nodes_network}}"
       published_ports:
         - 31000:31000
@@ -173,9 +173,9 @@
       image: milvusdb/milvus:v2.0.1
       command: "milvus run proxy"
       env:
-        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
-        MINIO_ADDRESS: {{MINIO_ADDRESS}}
-        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
+        MINIO_ADDRESS: "{{MINIO_ADDRESS}}"
+        PULSAR_ADDRESS: "{{PULSAR_ADDRESS}}"
       network_mode: "{{nodes_network}}"
       published_ports:
         - 19530:31000
