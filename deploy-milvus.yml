@@ -60,13 +60,13 @@
   tasks:
   - name: querynode
     docker_container:
-      name: bridge_querynode
+      name: querynode
       image: milvusdb/milvus:v2.0.1
       command: "milvus run querynode"
       env:
-        ETCD_ENDPOINTS: "10.170.0.8:2379"
-        MINIO_ADDRESS: "10.170.0.8:9000"
-        PULSAR_ADDRESS: "pulsar://10.170.0.8:6650"
+        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
+        MINIO_ADDRESS: {{MINIO_ADDRESS}}
+        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
       network_mode: "{{nodes_network}}"
       published_ports:
         - 21123:21123
@@ -74,13 +74,13 @@
 
   - name: datanode
     docker_container: 
-      name: bridge_datanode
+      name: datanode
       image: milvusdb/milvus:v2.0.1
       command: "milvus run datanode"
       env:
-        ETCD_ENDPOINTS: "10.170.0.8:2379"
-        MINIO_ADDRESS: "10.170.0.8:9000"
-        PULSAR_ADDRESS: "pulsar://10.170.0.8:6650"
+        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
+        MINIO_ADDRESS: {{MINIO_ADDRESS}}
+        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
       network_mode: "{{nodes_network}}"
       published_ports:
         - 21124:21124
@@ -88,14 +88,14 @@
 
   - name: indexnode
     docker_container: 
-      name: bridge_indexnode
+      name: indexnode
       image: milvusdb/milvus:v2.0.1
       command: "milvus run indexnode"
       env:
-        ETCD_ENDPOINTS: "10.170.0.8:2379"
-        MINIO_ADDRESS: "10.170.0.8:9000"
-        PULSAR_ADDRESS: "pulsar://10.170.0.8:6650"
-        INDEX_COORD_ADDRESS: "bridge_indexcoord:31000"
+        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
+        MINIO_ADDRESS: {{MINIO_ADDRESS}}
+        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        # INDEX_COORD_ADDRESS: "indexcoord:31000"
       network_mode: "{{nodes_network}}"
       published_ports:
         - 21121:21121
@@ -109,14 +109,14 @@
   tasks:
   - name: rootcoord
     docker_container: 
-      name: bridge_rootcoord
+      name: rootcoord
       image: milvusdb/milvus:v2.0.1
       command: ["milvus", "run", "rootcoord"]
       env:
-        ETCD_ENDPOINTS: "10.170.0.8:2379"
-        MINIO_ADDRESS: "10.170.0.8:9000"
-        PULSAR_ADDRESS: "pulsar://10.170.0.8:6650"
-        QUERY_COORD_ADDRESS: "bridge_querycoord:19531"
+        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
+        MINIO_ADDRESS: {{MINIO_ADDRESS}}
+        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        QUERY_COORD_ADDRESS: {{QUERY_COORD_ADDRESS}}
       network_mode: "{{nodes_network}}"
       published_ports:
         - 53100:53100
@@ -124,14 +124,14 @@
 
   - name: datacoord
     docker_container: 
-      name: bridge_datacoord
+      name: datacoord
       image: milvusdb/milvus:v2.0.1
       command: ["milvus", "run", "datacoord"]
       env:
-        ETCD_ENDPOINTS: "10.170.0.8:2379"
-        MINIO_ADDRESS: "10.170.0.8:9000"
-        PULSAR_ADDRESS: "pulsar://10.170.0.8:6650"
-        DATA_COORD_ADDRESS: "bridge_datacoord:13333"
+        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
+        MINIO_ADDRESS: {{MINIO_ADDRESS}}
+        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        DATA_COORD_ADDRESS: {{DATA_COORD_ADDRESS}}
       network_mode: "{{nodes_network}}"
       published_ports:
         - 13333:13333
@@ -139,14 +139,14 @@
 
   - name: querycoord
     docker_container:
-      name: bridge_querycoord
+      name: querycoord
       image: milvusdb/milvus:v2.0.1
       command: "milvus run querycoord"
       env:
-        ETCD_ENDPOINTS: "10.170.0.8:2379"
-        MINIO_ADDRESS: "10.170.0.8:9000"
-        PULSAR_ADDRESS: "pulsar://10.170.0.8:6650"
-        QUERY_COORD_ADDRESS: "bridge_querycoord::19531"
+        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
+        MINIO_ADDRESS: {{MINIO_ADDRESS}}
+        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        QUERY_COORD_ADDRESS: {{QUERY_COORD_ADDRESS}}
       network_mode: "{{nodes_network}}"
       published_ports:
         - 19531:19531
@@ -154,14 +154,14 @@
   
   - name: indexcoord
     docker_container: 
-      name: bridge_indexcoord
+      name: indexcoord
       image: milvusdb/milvus:v2.0.1
       command: ["milvus", "run", "indexcoord"]
       env:
-        ETCD_ENDPOINTS: "10.170.0.8:2379"
-        MINIO_ADDRESS: "10.170.0.8:9000"
-        PULSAR_ADDRESS: "pulsar://10.170.0.8:6650"
-        INDEX_COORD_ADDRESS: "bridge_indexcoord:31000"
+        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
+        MINIO_ADDRESS: {{MINIO_ADDRESS}}
+        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
+        INDEX_COORD_ADDRESS: {{INDEX_COORD_ADDRESS}}
       network_mode: "{{nodes_network}}"
       published_ports:
         - 31000:31000
@@ -169,13 +169,13 @@
 
   - name: "proxy"
     docker_container: 
-      name: bridge_proxy
+      name: proxy
       image: milvusdb/milvus:v2.0.1
       command: "milvus run proxy"
       env:
-        ETCD_ENDPOINTS: "10.170.0.8:2379"
-        MINIO_ADDRESS: "10.170.0.8:9000"
-        PULSAR_ADDRESS: "pulsar://10.170.0.8:6650"
+        ETCD_ENDPOINTS: {{ETCD_ENDPOINTS}}
+        MINIO_ADDRESS: {{MINIO_ADDRESS}}
+        PULSAR_ADDRESS: {{PULSAR_ADDRESS}}
       network_mode: "{{nodes_network}}"
       published_ports:
         - 19530:31000
