@@ -2,12 +2,14 @@
 - name: setup pre-requisites
   hosts: all
   become: yes
+  become_user: root
   roles:
     - install-modules
     - configure-hosts-file
 
 - name: install docker
   become: yes
+  become_user: root
   hosts: dockernodes
   roles:
     - docker-installation
