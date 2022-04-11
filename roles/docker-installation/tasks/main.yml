@@ -28,7 +28,6 @@
   pip: 
     name: docker
     state: latest
-    update_cache: true
   tags: docker
 
 - name: Install docker-compose from official github repo
