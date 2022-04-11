@@ -15,7 +15,7 @@
 
 - name: Add Docker packages to Repository
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename|lower }} stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
   tags: docker
 
 - name: Install Docker-CE

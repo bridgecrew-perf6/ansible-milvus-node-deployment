@@ -3,11 +3,11 @@
   become: true
   become_user: docker
   copy:
-    src: ~/.ssh/dcoker.pub
-    dest: /tmp/dcoker.pub
+    src: ~/.ssh/docker.pub
+    dest: /tmp/docker.pub
     mode: 0644
 - name: Append Public key in authorized_keys file
   authorized_key:
     user: docker
     state: present
-    key: "{{ lookup('file', '/tmp/dcoker.pub') }}"
+    key: "{{ lookup('file', '/tmp/docker.pub') }}"

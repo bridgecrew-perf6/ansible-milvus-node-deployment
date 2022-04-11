@@ -10,8 +10,8 @@
 
 - name: copy public key to nodes
   become: yes
-  become_user: docker
-  hosts: docker-nodes
+  become_user: root
+  hosts: dockernodes
   roles:
     - copy-keys
 
@@ -21,4 +21,3 @@
   hosts: dockernodes
   roles:
     - docker-installation
-
