@@ -4,8 +4,16 @@
   become: yes
   become_user: root
   roles:
+    - create-sudo-user
     - install-modules
     - configure-hosts-file
+
+- name: copy public key to nodes
+  become: yes
+  become_user: docker
+  hosts: docker-nodes
+  roles:
+    - copy-keys
 
 - name: install docker
   become: yes

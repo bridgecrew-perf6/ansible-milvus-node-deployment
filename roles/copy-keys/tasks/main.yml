@@ -1,0 +1,13 @@
+---
+- name: Copy Publick Key to Other Hosts
+  become: true
+  become_user: docker
+  copy:
+    src: ~/.ssh/dcoker.pub
+    dest: /tmp/dcoker.pub
+    mode: 0644
+- name: Append Public key in authorized_keys file
+  authorized_key:
+    user: docker
+    state: present
+    key: "{{ lookup('file', '/tmp/dcoker.pub') }}"
