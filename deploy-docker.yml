@@ -10,20 +10,7 @@
 - name: install docker
   become: yes
   become_user: root
-  hosts: docker-nodes
+  hosts: dockernodes
   roles:
     - docker-installation
 
-- name: initialize docker swarm
-  become: yes
-  become_user: root
-  hosts: swarm-managers
-  roles:
-    - docker-swarm-init
-
-- name: add workers to the swarm
-  become: yes
-  become_user: root
-  hosts: swarm-workers
-  roles:
-    - docker-swarm-add-worker
