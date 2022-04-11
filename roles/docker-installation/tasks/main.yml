@@ -26,11 +26,5 @@
   apt: name="python3-docker" state=latest update_cache=yes
   tags: docker
 
-- name: Install docker-compose from official github repo
-  get_url:
-    url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
-    dest: /usr/local/bin/docker-compose
-    mode: 'a+x'
-
 - name: Install docker-compose python3 library
-  command: "pip3 install docker-compose"
+  pip3: name="docker-compose" state=latest update_cache=yes
