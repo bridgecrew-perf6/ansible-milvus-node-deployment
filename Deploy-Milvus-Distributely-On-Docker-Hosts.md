@@ -115,26 +115,7 @@ Milvus分布式部署到多台Docker Host
     运行docker ps，初始状态下，返回结果没有运行的container。
 创建Milvus
     检查deploy-milvus.yml，在进入目录后运行ansible-playbook deploy-milvus.yml --syntax-check来检查语法错误，正常的返回结果为：playbook: deploy-milvus.yml
-        <!-- 
-    - name: Create milvus #Play名称，一个Play对应它定义的主机组和相应的tasks
-      hosts: "group" #Inventory中定义的组
-      become: yes
-      become_user: root
-      tasks:
-      - name: etcd #Task名称
-        docker_container: #创建的资源类型
-          name:  #Container名称
-          image: #选择Image
-          command: #启动Container后执行的系统命令和参数
-          healthcheck: #Container健康检查
-            test: ["CMD", "wget", "-q", "--tries=1", "--spider", "http://10.170.0.8:2381/health"]
-          env: #设置Container中的环境变量
-            ETCD_AUTO_COMPACTION_MODE: revision
-          network_mode: "{{dependencies_network}}"  #定义容器使用的网络，在Docker中可使用Bridge，Host Nework。使用Host模式该Container和主机共享IP地址和Port，使用Bridge模式，可以发布Port
-          ports:
-            23792379
-    ```
-    
+
     运行 ansible-playbook deploy-milvus.yml，创建Milvus的任务已在deploy-milvus.yml中定义，在脚本中有详细说明。
     返回结果如下：
 
