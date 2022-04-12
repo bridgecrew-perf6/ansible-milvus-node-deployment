@@ -1,45 +1,49 @@
 # Milvus分布式部署到多台Docker Host
 本篇文档将介绍如何创建Milvus分布式部署，并且提供Ansible Playbook创建所需的Docker Host，以及Docker Container来运行分布式Milvus.
 ### 前置条件：
-1. 准备3台虚拟机做Docker主机，并保证网络畅通。建议资源：4CPU, 8GB内存，100GB磁盘。用户可以根据自身条件向上或向下调整配置，最低保持2CPU, 4GB内存。
+1. 准备3台虚拟机做Docker主机，并保证网络畅通。建议资源：4CPU, 8GB内存，100GB磁盘。用户可以根据自身条件向上或向下调整配置，最低保证2CPU, 4GB内存。
 2. 虚拟机操作系统，Ubuntu 20.04 LTS。
 3. 设置好Ansible admin controller。任何能够运行Python与Ansible的设备都可以，用户如果新建Ansible controller，建议选择Ubuntu操作系统，系统资源保证能够流畅运行Ansible任务即可。
 4. 其它的依赖项将会在Playbook中安装与设置，在后面的内容会逐步说明。
 ### 开始安装Docker
 #### Ansible Inventory
 Ansible Inventory可以对Host分组，在执行相同任务时可以按组分配。
-    [dockernodes] #方括号表示组名，作用为创建主机组。在Playbook中引用组名，会部署到该组下所包含的主机。"dockernodes"组适合于Docker安装的任务，所有的Docker主机安装任务都相同。
-    dockernode01 #根据实际Hostname替换此处默认值
-    dockernode02
-    dockernode03
+```
+[dockernodes] #方括号表示组名，作用为创建主机组。在Playbook中引用组名，会部署到该组下所包含的主机。"dockernodes"组适合于Docker安装的任务，所有的Docker主机安装任务都相同。
+dockernode01 #根据实际Hostname替换此处默认值
+dockernode02
+dockernode03
 
-    [admin]
-    ansible-controller
+[admin]
+ansible-controller
 
-    [coords]
-    dockernode01
+[coords]
+dockernode01
 
-    [nodes]
-    dockernode02
+[nodes]
+dockernode02
 
-    [dependencies]
-    dockernode03
+[dependencies]
+dockernode03
 
-    [docker:children] #"docker"组是为了定义变量而创建的组。
-    dockernodes
-    coords
-    nodes
-    dependencies
+[docker:children] #"docker"组是为了定义变量而创建的组。
+dockernodes
+coords
+nodes
+dependencies
 
-    [docker:vars] #定义变量，这里定义的变量此组下所有的成员都可以引用。
-    ansible_python_interpreter=/usr/bin/python3
-    StrictHostKeyChecking=no
+[docker:vars] #定义变量，这里定义的变量此组下所有的成员都可以引用。
+ansible_python_interpreter=/usr/bin/python3
+StrictHostKeyChecking=no
+```
 #### Ansible.cfg
 Ansible配置文件可以控制Playbook中的行为，例如ssh key和其它设置方便Ansible运行Playbook。
-    [defaults]
-    host_key_checking = False
-    inventory = inventory.ini #定义Inventory引用文件，如不定义则需要在Ansible-Playbook命令中使用 "-i" 参数再加入文件地址。
-    private_key_file=~/.my_ssh_keys/gpc_sshkey #Ansible访问Docker主机的SSH钥匙，如主机上不需要SSH则可以删除此处。
+```
+[defaults]
+host_key_checking = False
+inventory = inventory.ini #定义Inventory引用文件，如不定义则需要在Ansible-Playbook命令中使用 "-i" 参数再加入文件地址。
+private_key_file=~/.my_ssh_keys/gpc_sshkey #Ansible访问Docker主机的SSH钥匙，如主机上不需要SSH则可以删除此处。
+```
 #### Ansible运行脚本deploy-docker.yml中详细定义了安装Docker的任务。
     - name: setup pre-requisites #安装前置条件
     hosts: all #指定执行该任务的主机，在Inventory下定义的组在此可以引用
