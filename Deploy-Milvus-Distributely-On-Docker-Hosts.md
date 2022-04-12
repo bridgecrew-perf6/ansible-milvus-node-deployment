@@ -40,7 +40,7 @@ ansible_python_interpreter=/usr/bin/python3
 StrictHostKeyChecking=no
 ```
 #### Ansible.cfg
-Ansible配置文件可以控制Playbook中的行为，例如ssh key和其它设置方便Ansible运行Playbook。
+Ansible配置文件可以控制Playbook中的行为，例如ssh key和其它设置，方便Ansible运行Playbook。
 ```
 [defaults]
 host_key_checking = False
