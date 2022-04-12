@@ -6,8 +6,8 @@
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
     command: "minio server /minio_data"
-    volumes:
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
+    # volumes:
+    #   - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/minio/health/live"]
       interval: 30s

@@ -12,6 +12,6 @@
       ETCD_AUTO_COMPACTION_MODE: revision
       ETCD_AUTO_COMPACTION_RETENTION: "1000"
       ETCD_QUOTA_BACKEND_BYTES: "4294967296"
-    volumes:
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
+    # volumes:
+    #   - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
     network_mode: "{{dependencies_network}}" #使用Host网络，Host定义在Inventory的变量中。如果使用Bridge网络则需要Publish相关的端口
