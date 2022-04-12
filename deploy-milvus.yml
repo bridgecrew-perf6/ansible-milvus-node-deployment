@@ -25,10 +25,10 @@
   become_user: root
   tags: docker
   roles:
-    - deploy-rootqoord
-    - deploy-indexqoord
-    - deploy-dataqoord
-    - deploy-queryqoord
+    - deploy-rootcoord
+    - deploy-indexcoord
+    - deploy-datacoord
+    - deploy-querycoord
     - deploy-proxy
 
 
