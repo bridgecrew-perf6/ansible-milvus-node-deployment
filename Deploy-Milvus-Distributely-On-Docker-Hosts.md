@@ -1,5 +1,5 @@
 # Milvus分布式部署到多台Docker Host
-本篇文档将介绍如何创建Milvus分布式部署，并且提供Ansible Playbook创建所需的Docker Host，以及Docker Container来运行分布式Milvus.
+本篇文档将介绍如何创建Milvus分布式部署，并且提供Ansible Playbook创建所需的Docker Host，以及Docker Container来运行分布式Milvus。
 ### 前置条件：
 1. 准备3台虚拟机做Docker主机，并保证网络畅通。建议资源：4CPU, 8GB内存，100GB磁盘。用户可以根据自身条件向上或向下调整配置，最低保证2CPU, 4GB内存。
 2. 虚拟机操作系统，Ubuntu 20.04 LTS。
@@ -9,7 +9,7 @@
 #### Ansible Inventory
 Ansible Inventory可以对Host分组，在执行相同任务时可以按组分配。
 ```
-[dockernodes] #方括号表示组名，作用为创建主机组。在Playbook中引用组名，会部署到该组下所包含的主机。"dockernodes"组适合于Docker安装的任务，所有的Docker主机安装任务都相同。
+[dockernodes] #方括号表示组名
 dockernode01 #根据实际Hostname替换此处默认值
 dockernode02
 dockernode03
@@ -26,13 +26,13 @@ dockernode02
 [dependencies]
 dockernode03
 
-[docker:children] #"docker"组是为了定义变量而创建的组。
+[docker:children] #定义"docker"组
 dockernodes
 coords
 nodes
 dependencies
 
-[docker:vars] #定义变量，这里定义的变量此组下所有的成员都可以引用。
+[docker:vars] #定义组变量
 ansible_python_interpreter=/usr/bin/python3
 StrictHostKeyChecking=no
 ```
@@ -41,24 +41,25 @@ Ansible配置文件可以控制Playbook中的行为，例如ssh key和其它设�
 ```
 [defaults]
 host_key_checking = False
-inventory = inventory.ini #定义Inventory引用文件，如不定义则需要在Ansible-Playbook命令中使用 "-i" 参数再加入文件地址。
-private_key_file=~/.my_ssh_keys/gpc_sshkey #Ansible访问Docker主机的SSH钥匙，如主机上不需要SSH则可以删除此处。
+inventory = inventory.ini #定义Inventory引用文件
+private_key_file=~/.my_ssh_keys/gpc_sshkey #Ansible访问Docker主机的ssh key
 ```
-#### Ansible运行脚本deploy-docker.yml中详细定义了安装Docker的任务。
+Ansible运行脚本deploy-docker.yml中详细定义了安装Docker的任务。
 ```
 - name: setup pre-requisites #安装前置条件
-hosts: all #指定执行该任务的主机，在Inventory下定义的组在此可以引用
-become: yes #提升执行任务的权限
-become_user: root
-roles:
-    - install-modules #预配置的任务，安装curl, wget, python, ntp, python-pip等工具。详细任务参考文件 .\roles\install-modules\main.yml
-    - configure-hosts-file #预配置的任务，添加Host记录。详细任务参考文件 .\roles\configure-hosts-file\tasks\main.yml
-- name: install docker #安装Docker
-become: yes
-become_user: root
-hosts: dockernodes
-roles:
-    - docker-installation #安装Docker。详细任务参考文件 .\roles\docker-installation\tasks\main.yml
+  hosts: all #指定执行该任务的主机
+  become: yes #提升执行任务权限
+  become_user: root
+  roles:
+    - install-modules
+    - configure-hosts-file
+
+- name: install docker
+  become: yes
+  become_user: root
+  hosts: dockernodes
+  roles:
+    - docker-installation
 ```
 #### 测试Ansible connectivity
 在系统terminal中进入脚本的目录下，运行ansible all -m ping，如果未在指定ansible.cfg中指定inventory，则需要加入"-i"并指定路径，否则ansible将引用/etc/ansible/hosts的主机地址。返回的结果如下:
