@@ -81,9 +81,8 @@
         "ping": "pong"
     }
     ```
-###### 运行ansible-playbook deploy-docker.yml --syntax-check检查脚本是否有语法错误，返回的正常结果如下：playbook: deploy-docker.yml
-###### 运行ansible-playbook deploy-docker.yml，部分返回结果如下：
-    ```
+##### 运行ansible-playbook deploy-docker.yml --syntax-check检查脚本是否有语法错误，返回的正常结果如下：playbook: deploy-docker.yml
+##### 运行ansible-playbook deploy-docker.yml，部分返回结果如下：
     TASK [docker-installation : Install Docker-CE] *******************************************************************
     ok: [dockernode01]
     ok: [dockernode03]
@@ -104,22 +103,17 @@
     dockernode01               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     dockernode02               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     dockernode03               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-    ```
-###### 到这里Docker就已经成功地安装到了3台主机上，接下来我们检查Docker安装是否成功。
+##### 到这里Docker就已经成功地安装到了3台主机上，接下来我们检查Docker安装是否成功。
     SSH分别登录到3台主机，运行docker -v，root以外的帐户运行sudo docker -v，返回结果如下：
-    ```
     root@swarm-manager:~$ docker -v
     Docker version 20.10.14, build a224086
-    ```
     运行docker ps，初始状态下，返回结果没有运行的container。
 ### 创建Milvus
-###### 检查deploy-milvus.yml，在进入目录后运行ansible-playbook deploy-milvus.yml --syntax-check来检查语法错误，正常的返回结果为：
+##### 检查deploy-milvus.yml，在进入目录后运行ansible-playbook deploy-milvus.yml --syntax-check来检查语法错误，正常的返回结果为：
 ``` playbook: deploy-milvus.yml ```
 
-###### 运行 ansible-playbook deploy-milvus.yml，创建Milvus的任务已在deploy-milvus.yml中定义，在脚本中有详细说明。
-    返回结果如下：
-
-    ```
+##### 运行 ansible-playbook deploy-milvus.yml，创建Milvus的任务已在deploy-milvus.yml中定义，在脚本中有详细说明。
+###### 返回结果如下：
     PLAY [Create milvus-etcd, minio, pulsar, network] *****************************************************************
 
     TASK [Gathering Facts] ********************************************************************************************
