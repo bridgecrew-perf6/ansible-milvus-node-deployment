@@ -6,7 +6,8 @@
 3. 设置好Ansible admin controller。任何能够运行Python与Ansible的设备都可以，用户如果新建Ansible controller，建议选择Ubuntu操作系统，系统资源保证能够流畅运行Ansible任务即可。
 4. 其它的依赖项将会在Playbook中安装与设置，在后面的内容会逐步说明。
 ### 开始安装Docker
-#### Ansible主机清单Inventory文件可以将主机分组，在执行相同任务时可以按组分配。
+#### Ansible Inventory
+Ansible Inventory可以对Host分组，在执行相同任务时可以按组分配。
     [dockernodes] #方括号表示组名，作用为创建主机组。在Playbook中引用组名，会部署到该组下所包含的主机。"dockernodes"组适合于Docker安装的任务，所有的Docker主机安装任务都相同。
     dockernode01 #根据实际Hostname替换此处默认值
     dockernode02
@@ -33,7 +34,8 @@
     [docker:vars] #定义变量，这里定义的变量此组下所有的成员都可以引用。
     ansible_python_interpreter=/usr/bin/python3
     StrictHostKeyChecking=no
-#### Ansible配置文件Ansible.cfg文件可以控制Playbook中的行为，例如ssh key等。
+#### Ansible.cfg
+Ansible配置文件可以控制Playbook中的行为，例如ssh key和其它设置方便Ansible运行Playbook。
     [defaults]
     host_key_checking = False
     inventory = inventory.ini #定义Inventory引用文件，如不定义则需要在Ansible-Playbook命令中使用 "-i" 参数再加入文件地址。
@@ -52,7 +54,8 @@
     hosts: dockernodes
     roles:
         - docker-installation #安装Docker。详细任务参考文件 .\roles\docker-installation\tasks\main.yml
-#### 运行Ansible和虚拟机网络连接性。在系统terminal中进入脚本的目录下，运行ansible all -m ping，如果未在指定ansible.cfg中指定inventory，则需要加入"-i"并指定路径，否则ansible将引用/etc/ansible/hosts的主机地址。返回的结果如下:
+#### 测试Ansible connectivity
+在系统terminal中进入脚本的目录下，运行ansible all -m ping，如果未在指定ansible.cfg中指定inventory，则需要加入"-i"并指定路径，否则ansible将引用/etc/ansible/hosts的主机地址。返回的结果如下:
     dockernode01 | SUCCESS => {
     "changed": false,
     "ping": "pong"
@@ -110,6 +113,7 @@ SSH分别登录到3台主机，运行docker -v，root以外的帐户运行sudo d
 
 #### 创建Milvus Container
 运行 ansible-playbook deploy-milvus.yml，创建Milvus的任务已在deploy-milvus.yml中定义，在脚本中有详细说明。返回结果如下：
+
     PLAY [Create milvus-etcd, minio, pulsar, network] *****************************************************************
 
     TASK [Gathering Facts] ********************************************************************************************
@@ -162,4 +166,5 @@ SSH分别登录到3台主机，运行docker -v，root以外的帐户运行sudo d
     dockernode01               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     dockernode02               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     dockernode03               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
 到这里Milvus已部署到3台Docker主机上，接下来可以参考[Hello Milvus](https://milvus.io/docs/v2.0.x/example_code.md)进行一个hello_milvus.py的测试。
