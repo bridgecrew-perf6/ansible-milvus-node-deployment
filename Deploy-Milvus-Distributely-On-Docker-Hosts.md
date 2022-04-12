@@ -1,7 +1,7 @@
 # Milvus分布式部署到多台Docker Host
 本篇文档将介绍如何创建Milvus分布式部署，并且提供Ansible Playbook创建所需的Docker Host，和Container来运行分布式Milvus。
 ### 前置条件：
-1. 准备3台虚拟机做Docker主机，保证网络畅通。建议资源：4CPU, 8GB内存，100GB磁盘，用户可以根据需要调整配置，最低保证2CPU, 4GB内存。
+1. 准备3台VM做Docker Host，保证网络畅通。建议资源：4CPU，8GB内存，100GB磁盘，用户可以根据需要调整配置，最低保证2CPU, 4GB内存。
 2. 虚拟机操作系统，Ubuntu 20.04 LTS。
 3. 设置好Ansible admin controller。用户如果新建Ansible controller，建议选择Ubuntu操作系统，系统资源保证能够流畅运行Ansible任务即可。
 4. 其它的依赖项将会在Playbook中安装与设置，在后面的内容会逐步说明。
