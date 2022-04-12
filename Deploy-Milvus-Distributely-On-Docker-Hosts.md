@@ -51,8 +51,8 @@ private_key_file=~/.my_ssh_keys/gpc_sshkey #Ansible访问Docker主机的ssh key
 Playbook中详细定义了安装Docker的任务，具体请参考内置的注释。
 ```
 - name: setup pre-requisites #安装前置条件
-  hosts: all #指定执行该任务的主机
-  become: yes #提升执行任务权限
+  hosts: all 
+  become: yes
   become_user: root
   roles:
     - install-modules
