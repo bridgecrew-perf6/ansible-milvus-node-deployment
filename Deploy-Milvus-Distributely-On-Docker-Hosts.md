@@ -1,10 +1,10 @@
 # Milvus分布式部署到多台Docker Host
 本篇文档将介绍如何创建Milvus分布式部署，并且提供Ansible Playbook创建所需的Docker Host，以及Docker Container来运行分布式Milvus.
 ### 前置条件：
-Docker Host. 准备3台虚拟机，并保护网络畅通。建议资源配置：4CPU, 8GB内存，100GB磁盘空间。用户可以根据自身备具的条件向上或向下调整资源配置，但最低保持2CPU, 4GB内存。
-虚拟机操作系统，Ubuntu 20.04 LTS
-Ansible admin controller，任何能够运行Python与Ansible的设备都可以。用户如果需要新建Ansible admin controller，建议选择Ubuntu操作系统，系统资源保证最低限度能够流畅地运行Ansible任务即可。
-其它的依赖项将会在Playbook中安装与设置，在后面的内容会逐步说明。
+1. Docker Host. 准备3台虚拟机，并保护网络畅通。建议资源配置：4CPU, 8GB内存，100GB磁盘空间。用户可以根据自身备具的条件向上或向下调整资源配置，但最低保持2CPU, 4GB内存。
+2. 虚拟机操作系统，Ubuntu 20.04 LTS
+3. Ansible admin controller，任何能够运行Python与Ansible的设备都可以。用户如果需要新建Ansible admin controller，建议选择Ubuntu操作系统，系统资源保证最低限度能够流畅地运行Ansible任务即可。
+4. 其它的依赖项将会在Playbook中安装与设置，在后面的内容会逐步说明。
 ### 开始安装Docker
 #### Ansible主机清单Inventory文件可以将主机分组，在执行相同任务时可以按组分配。
 
@@ -97,7 +97,7 @@ Ansible admin controller，任何能够运行Python与Ansible的设备都可以�
     dockernode02               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     dockernode03               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ##### 到这里Docker就已经成功地安装到了3台主机上，接下来我们检查Docker安装是否成功。
-SSH分别登录到3台主机，运行docker -v，root以外的帐户运行sudo docker -v，返回结果如下：
+##### SSH分别登录到3台主机，运行docker -v，root以外的帐户运行sudo docker -v，返回结果如下：
     root@swarm-manager:~$ docker -v
     Docker version 20.10.14, build a224086
 运行docker ps，初始状态下，返回结果没有运行的container。
