@@ -66,7 +66,7 @@ Playbook中详细定义了安装Docker的任务，具体请参考内置的注释
     - docker-installation
 ```
 #### 测试Ansible connectivity
-在系统terminal中进入脚本的目录下，运行ansible all -m ping，如果未在ansible.cfg中指定inventory，则需要加入"-i"并指定路径，否则ansible将引用/etc/ansible/hosts的主机地址。  
+在terminal中进入脚本的目录下，运行ansible all -m ping，如果未在ansible.cfg中指定inventory，则需要加入"-i"并指定路径，否则ansible将引用/etc/ansible/hosts的主机地址。  
 返回的结果如下:
 ```
 dockernode01 | SUCCESS => {
