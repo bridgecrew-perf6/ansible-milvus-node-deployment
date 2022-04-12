@@ -172,5 +172,5 @@
     dockernode01               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     dockernode02               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     dockernode03               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-    ```
+
     到这里Milvus已部署到3台Docker主机上，接下来可以参考[Hello Milvus](https://milvus.io/docs/v2.0.x/example_code.md)进行一个hello_milvus.py的测试。
