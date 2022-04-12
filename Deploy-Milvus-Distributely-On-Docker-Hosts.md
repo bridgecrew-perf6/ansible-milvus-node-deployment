@@ -87,9 +87,11 @@ dockernode02 | SUCCESS => {
 ```
 #### 检查Playbook语法
 运行ansible-playbook deploy-docker.yml --syntax-check检查脚本是否有语法错误，返回的正常结果如下：
-    playbook: deploy-docker.yml
+```
+playbook: deploy-docker.yml
+```
 #### 安装Docker
-运行ansible-playbook deploy-docker.yml，部分返回结果如下：
+运行ansible-playbook deploy-docker.yml，部分返回结果看起来如下图：
 ```
 TASK [docker-installation : Install Docker-CE] *******************************************************************
 ok: [dockernode01]
