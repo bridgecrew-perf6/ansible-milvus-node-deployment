@@ -3,8 +3,11 @@
 ### 前置条件：
 1. 准备3台VM做Docker Host，保证网络畅通。建议4cpu，8GB RAM，磁盘根据数据量自定，用户可以根据需要调整，最低保证2cpu，4GB。
 2. 虚拟机操作系统，Ubuntu 20.04 LTS。
-3. 设置好Ansible admin controller，如果新建Ansible controller，建议选择Ubuntu操作系统，系统资源保证能够运行Ansible任务。
-4. 其它的依赖项将会在Playbook中安装与设置，在后面的内容会逐步说明。
+3. 设置Ansible admin controller，如果新建Ansible controller，建议选择Ubuntu操作系统，系统资源保证能够运行Ansible任务。
+4. 下载ansible-milvus-node-deployment playbook。
+```
+git clone https://github.com/john-h-luo/ansible-milvus-node-deployment.git
+```
 ### 开始安装Docker
 #### Ansible Inventory
 Ansible Inventory可以对Host分组，在执行相同任务时可以按组分配。
