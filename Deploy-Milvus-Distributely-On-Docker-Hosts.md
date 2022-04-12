@@ -44,7 +44,8 @@ host_key_checking = False
 inventory = inventory.ini #定义Inventory引用文件
 private_key_file=~/.my_ssh_keys/gpc_sshkey #Ansible访问Docker主机的ssh key
 ```
-Ansible运行脚本deploy-docker.yml中详细定义了安装Docker的任务。
+#### Deploy-docker.yml
+Playbook中详细定义了安装Docker的任务，具体请参考内置的注释。
 ```
 - name: setup pre-requisites #安装前置条件
   hosts: all #指定执行该任务的主机
