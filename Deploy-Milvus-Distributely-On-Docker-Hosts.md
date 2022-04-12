@@ -66,7 +66,7 @@ Playbook中详细定义了安装Docker的任务，具体请参考内置的注释
     - docker-installation
 ```
 #### 测试Ansible connectivity
-在系统terminal中进入脚本的目录下，运行ansible all -m ping，如果未在ansible.cfg中指定inventory，则需要加入"-i"并指定路径，否则ansible将引用/etc/ansible/hosts的主机地址。
+在系统terminal中进入脚本的目录下，运行ansible all -m ping，如果未在ansible.cfg中指定inventory，则需要加入"-i"并指定路径，否则ansible将引用/etc/ansible/hosts的主机地址。  
 返回的结果如下:
 ```
 dockernode01 | SUCCESS => {
@@ -90,7 +90,7 @@ dockernode02 | SUCCESS => {
 }
 ```
 #### 检查Playbook语法
-运行ansible-playbook deploy-docker.yml --syntax-check检查脚本是否有语法错误。
+运行ansible-playbook deploy-docker.yml --syntax-check检查脚本是否有语法错误。  
 返回的正常结果如下：
 ```
 playbook: deploy-docker.yml
@@ -122,7 +122,7 @@ dockernode03               : ok=10   changed=1    unreachable=0    failed=0    s
 ```
 到这里Docker就已经成功地安装到了3台主机上，接下来我们检查Docker安装是否成功。
 #### 检查Docker是否安装成功
-SSH分别登录到3台主机，运行docker -v，root以外的帐户运行sudo docker -v。
+SSH分别登录到3台主机，运行docker -v，root以外的帐户运行sudo docker -v。  
 返回结果如下：
 ```
 root@swarm-manager:~$ docker -v
@@ -131,13 +131,13 @@ Docker version 20.10.14, build a224086
 运行docker ps，初始状态下，返回结果没有运行的container。
 ### 创建Milvus
 #### 检查deploy-milvus.yml
-在进入目录后运行ansible-playbook deploy-milvus.yml --syntax-check来检查语法错误。
+在进入目录后运行ansible-playbook deploy-milvus.yml --syntax-check来检查语法错误。  
 正常的返回结果为：
 ```
 playbook: deploy-milvus.yml
 ```
 #### 创建Milvus Container
-运行 ansible-playbook deploy-milvus.yml，创建Milvus的任务已在deploy-milvus.yml中定义，在脚本中有详细说明。
+运行 ansible-playbook deploy-milvus.yml，创建Milvus的任务已在deploy-milvus.yml中定义，在脚本中有详细说明。  
 返回结果如下：
 ```
 PLAY [Create milvus-etcd, minio, pulsar, network] *****************************************************************
