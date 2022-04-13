@@ -1,7 +1,7 @@
 - name: querycoord
   docker_container:
     name: querycoord
-    image: milvusdb/milvus:v2.0.1
+    image: "{{image}}"
     command: "milvus run querycoord"
     env:
       ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"

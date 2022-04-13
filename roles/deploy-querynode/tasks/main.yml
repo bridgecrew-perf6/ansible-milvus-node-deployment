@@ -1,7 +1,7 @@
 - name: querynode
   docker_container:
     name: querynode
-    image: milvusdb/milvus:v2.0.1
+    image: "{{image}}"
     command: "milvus run querynode"
     env:
       ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"

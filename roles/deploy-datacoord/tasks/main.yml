@@ -1,7 +1,7 @@
 - name: datacoord
   docker_container: 
     name: datacoord
-    image: milvusdb/milvus:v2.0.1
+    image: "{{image}}"
     command: ["milvus", "run", "datacoord"]
     env:
       ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"

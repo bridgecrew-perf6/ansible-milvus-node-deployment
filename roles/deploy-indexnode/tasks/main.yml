@@ -1,7 +1,7 @@
 - name: indexnode
   docker_container: 
     name: indexnode
-    image: milvusdb/milvus:v2.0.1
+    image: "{{image}}"
     command: "milvus run indexnode"
     env:
       ETCD_ENDPOINTS: "{{ETCD_ENDPOINTS}}"
